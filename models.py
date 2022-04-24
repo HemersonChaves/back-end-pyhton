@@ -12,7 +12,7 @@ class Regras(str, Enum):
     user = "user"
     student = "student"
 
-class User(BaseModel):
+class Usuario(BaseModel):
     id: Optional[UUID] = uuid4()
     nome: str
     sobrenome: str
