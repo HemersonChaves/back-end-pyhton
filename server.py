@@ -1,7 +1,6 @@
 from typing import List
 from uuid import UUID, uuid4
-from fastapi import FastAPI
-from regex import D
+from fastapi import FastAPI, HTTPException
 from models import Regras, Sexo, Usuario
 
 app = FastAPI()
@@ -40,4 +39,9 @@ async def excluiUsuario(id_usuario: UUID):
     for usuario in db:
         if usuario.id == id_usuario:
             db.remove(usuario)
-            return 
+            return
+    raise HTTPException(
+        status_code = 404,
+        detail=f"Usuario com o id: {id_usuario} não existe"
+    )
+        
