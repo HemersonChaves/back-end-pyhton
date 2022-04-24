@@ -20,9 +20,9 @@ db: List[User] = [
 ]
 
 @app.get("/")
-def home():
+async def home():
     return {"message": "hello World! Servidor python"}
 
-@app.get("/perfil")
-def perfil():
-    return {"Nome": "Hemerson chaves"}
+@app.get("/api/v1/usuarios")
+async def buscaUsuarios():
+    return db;
