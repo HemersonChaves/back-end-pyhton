@@ -1,6 +1,7 @@
 from typing import List
-from uuid import uuid4
+from uuid import UUID, uuid4
 from fastapi import FastAPI
+from regex import D
 from models import Regras, Sexo, Usuario
 
 app = FastAPI()
@@ -25,11 +26,18 @@ db: List[Usuario] = [
 async def home():
     return {"message": "hello World! Servidor python"}
 
-@app.get("/api/v1/usuario")
+@app.get("/api/v1/usuarios")
 async def buscaUsuarios():
     return db;
 
-@app.post("/api/v1/usuario")
-async def registrar_usuario(usuario: Usuario):
+@app.post("/api/v1/usuarios")
+async def registrarUsuario(usuario: Usuario):
     db.append(usuario)
     return {"id_usuario": usuario.id}
+
+@app.delete("/api/v1/usuarios/{id_usuario}")
+async def excluiUsuario(id_usuario: UUID):
+    for usuario in db:
+        if usuario.id == id_usuario:
+            db.remove(usuario)
+            return 
