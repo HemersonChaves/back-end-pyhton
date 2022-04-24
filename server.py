@@ -5,7 +5,7 @@ from models import Regras, Sexo, Usuario
 
 app = FastAPI()
 
-db: List[Usuarior] = [
+db: List[Usuario] = [
     Usuario (
     id=uuid4(), 
     nome="Jamila", 
